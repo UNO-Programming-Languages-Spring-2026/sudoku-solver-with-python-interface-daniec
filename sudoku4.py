@@ -1,17 +1,16 @@
-# implement this solver using the clingo.ClingoApp class
+# copy of sudoku1.py modified to print the solution in the formatted sudoku style
 import sys, clingo
-from xml.parsers.expat import model
+from sudoku_board import Sudoku
+
 
 class ClingoApp(clingo.application.Application):
 
-    # overwrite print_model to sort the output alphabetically
+    # overwrite print_model to output the solution in formatted sudoku style
     def print_model(self, model, printer):
-        # get the atoms in the model
-        atoms = list(model.symbols(shown=True))
-        # sort the atoms alphabetically by their string representation
-        atoms = sorted(atoms, key=str)
-        # print the sorted atoms space-separated on one line
-        print(" ".join(str(atom) for atom in atoms))
+        # use Sudoku.from_model() to parse the model into a Sudoku object
+        sudoku = Sudoku.from_model(model)
+        # print the Sudoku object using __str__ (which formats it correctly)
+        print(sudoku)
 
 
     def main(self, ctl, files):
