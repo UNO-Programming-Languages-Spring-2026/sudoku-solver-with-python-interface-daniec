@@ -5,6 +5,14 @@ from sudoku_board import Sudoku
 
 class ClingoApp(clingo.application.Application):
 
+    class Context:
+
+    def __init__(self, board: Sudoku):
+        # YOUR CODE HERE
+        
+    def initial(self) -> list[clingo.symbol.Symbol]:
+        # YOUR CODE HERE
+
     # overwrite print_model to output the solution in formatted sudoku style
     def print_model(self, model, printer):
         # use Sudoku.from_model() to parse the model into a Sudoku object
