@@ -35,7 +35,23 @@ class Sudoku:
     @classmethod
     def from_str(cls, s: str) -> "Sudoku":
         sudoku = {}
-        # YOUR CODE HERE
+        
+        # split the string into rows and filter out empty lines
+        rows = [row for row in s.split("\n") if row.strip()]
+        
+        # loop through each row with its actual sudoku row number
+        for row_idx, row in enumerate(rows, start=1):
+       
+            # split the row into values filtering out empty strings from double spaces
+            values = [v for v in row.split(" ") if v]
+
+            # loop through each value with its column number
+            for col_idx, value in enumerate(values, start=1):
+
+                # if the value is a number add it to the dictionary
+                if value.isdigit():
+                    sudoku[(row_idx, col_idx)] = int(value)
+                    
         return cls(sudoku)
 
     @classmethod
