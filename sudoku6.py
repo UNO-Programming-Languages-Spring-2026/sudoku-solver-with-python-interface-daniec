@@ -8,10 +8,16 @@ class ClingoApp(clingo.application.Application):
     class Context:
 
     def __init__(self, board: Sudoku):
-        # YOUR CODE HERE
+        # store the sudoku board for use in the initial method
         
     def initial(self) -> list[clingo.symbol.Symbol]:
-        # YOUR CODE HERE
+        # loop through each cell in the board
+
+            # create a clingo symbol for each (row, col, value) entry
+
+            # add the symbol to the list
+
+        # return the list of symbols
 
     # overwrite print_model to output the solution in formatted sudoku style
     def print_model(self, model, printer):
