@@ -1,6 +1,6 @@
 # implement this solver using the clingo.ClingoApp class
-import sys, clingo
-from xml.parsers.expat import model
+import sys
+import clingo
 
 class ClingoApp(clingo.application.Application):
 
