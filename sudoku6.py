@@ -1,5 +1,6 @@
 # copy of sudoku4.py modified to read input in formatted sudoku style and 
 # convert it to clingo symbols using the Context class
+from importlib.resources import files
 import sys, clingo
 from sudoku_board import Sudoku
 
@@ -35,10 +36,16 @@ class ClingoApp(clingo.application.Application):
     def main(self, ctl, files):
         # load the sudoku encoding
         ctl.load("sudoku.lp")
-        # load the sudoku instance
-        ctl.load(files[0])
-        # ground the program and solve
-        ctl.ground([("base", [])])
+        # load the bridge rules that generate initial(a,b,c) facts from the Context class
+        ctl.load("sudoku_py.lp")
+        # read the input file and parse it into a Sudoku object using from_str
+        with open(files[0], "r") as f:
+            board = Sudoku.from_str(f.read())
+        # create a Context object with the Sudoku board
+        context = Context(board)
+        # ground the program using the Context object
+        ctl.ground([("base", [])], context=context)
+        # solve the program
         ctl.solve()
 
 if __name__ == "__main__":
