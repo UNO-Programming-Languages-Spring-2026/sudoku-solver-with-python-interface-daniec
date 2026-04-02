@@ -1,5 +1,6 @@
 # copy of sudoku1.py modified to print the solution in the formatted sudoku style
-import sys, clingo
+import sys
+import clingo
 from sudoku_board import Sudoku
 
 
@@ -11,7 +12,6 @@ class ClingoApp(clingo.application.Application):
         sudoku = Sudoku.from_model(model)
         # print the Sudoku object using __str__ (which formats it correctly)
         print(sudoku)
-
 
     def main(self, ctl, files):
         # load the sudoku encoding
