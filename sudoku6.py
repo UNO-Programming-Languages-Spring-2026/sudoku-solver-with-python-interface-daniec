@@ -1,8 +1,9 @@
 # copy of sudoku4.py modified to read input in formatted sudoku style and 
 # convert it to clingo symbols using the Context class
-from importlib.resources import files
-import sys, clingo
+import sys
+import clingo
 from sudoku_board import Sudoku
+
 
 class Context:
     def __init__(self, board: Sudoku):
@@ -13,15 +14,13 @@ class Context:
         symbols = []
         # loop through each cell in the board
         for (row, col), value in self.board.sudoku.items():
-
             # create a clingo tuple symbol for each (row, col, value) entry
             symbol = clingo.Tuple_((clingo.Number(row), clingo.Number(col), clingo.Number(value)))
-
             # add the symbols to the list
             symbols.append(symbol)
-
         # return the list of symbols
         return symbols
+
 
 class ClingoApp(clingo.application.Application):
 
@@ -31,7 +30,6 @@ class ClingoApp(clingo.application.Application):
         sudoku = Sudoku.from_model(model)
         # print the Sudoku object using __str__ (which formats it correctly)
         print(sudoku)
-
 
     def main(self, ctl, files):
         # load the sudoku encoding
